@@ -63,7 +63,7 @@ ReactDOM.render(<Page/>, document.getElementById(\"root\"));
     );
 
     let compiler = Compiler::new(cm.clone());
-    let _handler = Handler::with_emitter_writer(Box::new(stderr()), Some(compiler.cm.clone()));
+    // let _handler = Handler::with_emitter_writer(Box::new(stderr()), Some(compiler.cm.clone()));
 
     let lexer = Lexer::new(
       // We want to parse ecmascript
