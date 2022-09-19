@@ -20,8 +20,9 @@ fn build_args() -> String {
     .unwrap();
 
     for (key, value) in parsed.entries().rev(){
-        dbg!(key);
-        dbg!(value["long"]);
+        println!("{}", key);
+        println!("{}", value["long"]);
+        println!("{}", value["desc"]);
     }
     let args: Vec<String> = env::args().collect();
 
