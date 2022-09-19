@@ -2,7 +2,7 @@ extern crate getopts;
 use getopts::Options;
 use std::env;
 
-fn build_args(){
+fn build_args()->String{
 
     let args: Vec<String> = env::args().collect();
 
@@ -15,7 +15,7 @@ fn build_args(){
         Err(e)=>{panic!("{}", e)}
     };
 
-    println!("{}", matches.opt_str("i").unwrap());
+    matches.opt_str("i").unwrap()
 }
 
 fn main() {
@@ -30,7 +30,7 @@ fn main() {
     use swc_atoms::{JsWord};
     use swc_ecma_ast::{ImportSpecifier, Str};
 
-    build_args();
+    println!("{}", build_args());
 
     let source = "
     import React from \"react\";
