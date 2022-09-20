@@ -1,6 +1,8 @@
 #[macro_use]
 extern crate json;
 
+mod fs;
+use fs::write_file;
 extern crate getopts;
 use getopts::Options;
 use std::env;
@@ -294,6 +296,7 @@ export default class ActivityDetail extends Component {
 
     let s = serde_json::to_string_pretty(&module).expect("failed to serialize");
     // println!("ast json is \n {}", s);
-    let mut file = File::create("ast.json").expect("create failed");
-    file.write_all(s.as_bytes()).expect("write failed");
+    //let mut file = File::create("ast.json").expect("create failed");
+    //file.write_all(s.as_bytes()).expect("write failed");
+    write_file("ast.json", s.as_str()).unwrap();
 }
