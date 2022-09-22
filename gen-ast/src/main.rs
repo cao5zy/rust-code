@@ -8,8 +8,9 @@ use getopts::Options;
 use std::env;
 use std::fs::File;
 use std::io::Write;
+use std::io::{Result, Error, ErrorKind};
 
-fn build_args() -> String {
+fn build_args() -> Result<()>{
     let parsed = json::parse(
         r#"
                              {
@@ -23,25 +24,21 @@ fn build_args() -> String {
     )
     .unwrap();
 
-    for (key, value) in parsed.entries().rev(){
-        println!("{}", key);
-        println!("{}", value["long"]);
-        println!("{}", value["desc"]);
-    }
-    let args: Vec<String> = env::args().collect();
-
     let mut opts = Options::new();
+    for (key, value) in parsed.entries().rev(){
+        opts.optopt(key, value["long"].as_str().ok_or(Error::new(ErrorKind::Other, "long"))?, value["desc"].as_str().ok_or(Error::new(ErrorKind::Other, "desc"))?, key);
+    }
 
-    opts.optopt("i", "--input", "需要解析的文件名称", "input");
-
-    let matches = match opts.parse(&args[1..]) {
-        Ok(m) => m,
-        Err(e) => {
-            panic!("{}", e)
-        }
-    };
-
-    matches.opt_str("i").unwrap()
+    let args: Vec<String> = env::args().collect();
+    //let matches = match opts.parse(&args[1..]) {
+    //    Ok(m) => m,
+    //    Err(e) => {
+    //        panic!("{}", e)
+    //    }
+    //};
+    let matches = opts.parse(&args[1..]).map_err(|_|Error::new(ErrorKind::Other, "parse"));
+    println!("{}", matches?.opt_str("i").ok_or(Error::new(ErrorKind::Other, "parse"))?);
+    Ok(())
 }
 
 fn main() {
@@ -56,7 +53,8 @@ fn main() {
     use swc_ecma_ast::{ImportSpecifier, Str};
     use swc_ecma_parser::{lexer::Lexer, Parser, StringInput, Syntax, TsConfig};
 
-    println!("{}", build_args());
+    // println!("{}", build_args());
+    build_args();
 
     let source = "
 import { Component } from '@tarojs/taro'
