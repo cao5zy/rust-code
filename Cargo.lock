@@ -424,6 +424,28 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a06f77d526c1a601b7c4cdd98f54b5eaabffc14d5f2f0296febdc7f357c6d3ba"
 
 [[package]]
+name = "gen-ast"
+version = "0.1.0"
+dependencies = [
+ "getopts",
+ "json",
+ "serde_json",
+ "swc",
+ "swc_atoms",
+ "swc_babel_ast",
+ "swc_bundler",
+ "swc_common",
+ "swc_ecma_ast",
+ "swc_ecma_parser",
+ "swc_ecma_transforms",
+ "swc_ecma_transforms_base",
+ "swc_ecma_transforms_compat",
+ "swc_ecma_transforms_react",
+ "swc_ecma_transforms_typescript",
+ "swc_ecma_visit",
+]
+
+[[package]]
 name = "generic-array"
 version = "0.14.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -431,6 +453,15 @@ checksum = "501466ecc8a30d1d3b7fc9229b122b2ce8ed6e9d9223f1138d4babb253e51817"
 dependencies = [
  "typenum",
  "version_check",
+]
+
+[[package]]
+name = "getopts"
+version = "0.2.21"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "14dbbfd5c71d70241ecf9e6f13737f7b5ce823821063188d7e46c41d371eebd5"
+dependencies = [
+ "unicode-width",
 ]
 
 [[package]]
@@ -566,6 +597,12 @@ dependencies = [
  "swc_ecma_transforms_typescript",
  "swc_ecma_visit",
 ]
+
+[[package]]
+name = "json"
+version = "0.12.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "078e285eafdfb6c4b434e0d31e8cfcb5115b651496faca5749b88fafd4f23bfd"
 
 [[package]]
 name = "lazy_static"
